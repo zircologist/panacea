@@ -29,11 +29,15 @@ jobs:
   build_push:
     name: Build and push image
     runs-on: ubuntu-24.04
-
     permissions:
       contents: read
       packages: write
       id-token: write
+    strategy:
+      fail-fast: true
+      matrix:
+        edition: ["", "lab", "minimal"]
+        driver: ["", "Nvidia"]
 
     steps:
       - name: Prepare environment
